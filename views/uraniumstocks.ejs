@@ -1,0 +1,56 @@
+<%- include("_header") -%>
+
+<h1>List of Uranium Stocks</h1>
+
+<% if(message !== "success") { %>
+  <h1>We Encountered an Error</h1>
+  <p><%= message %></p>
+<% } else { %>
+  <h2>There are <%= model.length %> uranium stocks in the database</h2>
+  <table class="table">
+      <thead class="thead-dark">
+          <tr>
+              <th scope="col">Company Name</th>
+              <th scope="col">Headquarter</th>
+              <th scope="col">Incorporated</th>
+              <th scope="col">Stock Market</th>
+              <th scope="col">Stock Ticker</th>
+              <th scope="col">Stock Price</th>
+              <th scope="col">Mining Jurisdiction</th>
+              <th scope="col">Mining Method</th>
+              <th scope="col">Development Stage</th>
+              <th scope="col">Resource Quantity</th>
+              <th scope="col">Cost of Production</th>
+              <th scope="col">Cash</th>
+              <th scope="col">Debt</th>
+              <th scope="col">Cash Flow</th>
+              <th scope="col">Net Income</th>
+              <th scope="col">Website</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% model.forEach(stock => { %>
+              <tr>
+                  <td><%= stock.company_name %></td>
+                  <td><%= stock.headquarter %></td>
+                  <td><%= stock.incorporated %></td>
+                  <td><%= stock.market %></td>
+                  <td><%= stock.ticker %></td>
+                  <td><%= stock.stock_price %></td>
+                  <td><%= stock.jurisdiction %></td>
+                  <td><%= stock.mining_method %></td>
+                  <td><%= stock.development_stage %></td>
+                  <td><%= stock.resource_quantity %></td>
+                  <td><%= stock.cop %></td>
+                  <td><%= stock.cash %></td>
+                  <td><%= stock.debt %></td>
+                  <td><%= stock.cash_flow %></td>
+                  <td><%= stock.net_income %></td>
+                  <td><%= stock.website %></td>
+              </tr>
+          <% }) %>
+      </tbody>
+  </table>
+<% } %>
+
+<%- include("_footer") -%>
