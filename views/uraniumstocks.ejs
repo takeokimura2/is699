@@ -25,7 +25,9 @@
               <th scope="col">Debt</th>
               <th scope="col">Cash Flow</th>
               <th scope="col">Net Income</th>
-              <th scope="col">Website</th>
+              <th class="d-print-none">
+                <a class="btn btn-sm btn-success" href="/create">Add</a>
+              </th>
           </tr>
       </thead>
       <tbody>
@@ -46,7 +48,10 @@
                   <td><%= stock.debt %></td>
                   <td><%= stock.cash_flow %></td>
                   <td><%= stock.net_income %></td>
-                  <td><%= stock.website %></td>
+                  <td class="d-print-none">
+                    <a class="btn btn-sm btn-warning" href="/edit/<%= stock.company_id %>">Edit</a>
+                    <a class="btn btn-sm btn-danger" href="/delete/<%= stock.company_id %>">Delete</a>
+                  </td>
               </tr>
           <% }) %>
       </tbody>
