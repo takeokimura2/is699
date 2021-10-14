@@ -56,11 +56,15 @@ app.get("/uraniumstocks", (req, res) => {
   pool.query(sql, [], (err, result) => {
     var message = "";
     var model = {};
+    const companyName = [];
     if(err) {
         message = `Error - ${err.message}`;
     } else {
         message = "success";
         model = result.rows;
+        for (const record of model ){
+          companyName.push(record.company_name)
+        }
     };
     res.render("uraniumstocks", {
         message: message,
@@ -160,5 +164,120 @@ app.post("/delete/:id", (req, res) => {
   pool.query(sql, [id], (err, result) => {
     // if (err) ...
     res.redirect("/uraniumstocks");
+  });
+});
+
+// GET /news/5
+app.get("/news/:id", (req, res) => {
+  const id = req.params.id;
+  const sql = "SELECT * FROM URANIUM WHERE company_id = $1";
+  pool.query(sql, [id], (err, result) => {
+    // if (err) ...
+    res.render("news", { model: result.rows[0] });
+  });
+});
+
+//Setup routes to uranium stock analysis
+app.get("/uraniumstockanalysis", (req, res) => {
+  const sql = "SELECT * FROM URANIUM ORDER BY company_name";
+  pool.query(sql, [], (err, result) => {
+    var message = "";
+    var models = {};
+    const companyName = [];
+    const resourceQuantity = [];
+    if(err) {
+        message = `Error - ${err.message}`;
+    } else {
+        message = "success";
+        models = result.rows;
+        for (const model of models ){
+          companyName.push(model.company_name)
+          resourceQuantity.push(Number(model.resource_quantity))
+        }
+    };
+    res.render("uraniumstockanalysis", {
+        message: message,
+        model : models,
+        companyName: companyName,
+        resourceQuantity: resourceQuantity
+    });
+
+  });
+});
+
+//Setup routes to chart js
+app.get("/uraniumstockanalysis_test", (req, res) => {
+  const sql = "SELECT * FROM URANIUM ORDER BY company_name";
+
+  function getData(models) {
+    const companyName = [];
+    const resourceQuantity = [];
+
+    for (const model of models ){
+      companyName.push(model.company_name)
+      resourceQuantity.push(Number(model.resource_quantity))
+    }
+    return {companyName, resourceQuantity};
+  }
+
+  async function chartIt(models){
+
+    chartData = await getData(models);
+
+    //console.log(chartData.companyName)
+    //console.log(chartData.resourceQuantity)
+
+    const data = {
+      labels: chartData.companyName,
+      datasets: [{
+      label: 'Resource Quantity',
+      backgroundColor: 'rgba(0, 99, 255, 0.2)',
+      borderColor: 'rgba(0, 0, 255, 1.0)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'pink',
+      hoverBorderColor: 5,
+      fill: 'start',
+      data: chartData.resourceQuantity,
+      }
+      ]
+    };
+
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {}
+    };
+
+    console.log(config)
+    console.log(config.data)
+    console.log(config.data.datasets)
+
+    return config;
+    
+  }
+
+
+
+  pool.query(sql, [], (err, result) => {
+    var message = "";
+    var models = {};
+
+    if(err) {
+        message = `Error - ${err.message}`;
+    } else {
+        message = "success";
+        models = result.rows;
+
+        charts = chartIt(models);
+        
+
+    };
+    res.render("uraniumstockanalysis_test", {
+        message: message,
+        model: models,
+        chart: charts
+        
+    });
+
   });
 });

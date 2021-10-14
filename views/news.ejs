@@ -1,0 +1,19 @@
+<%- include("_header") -%>
+
+<h1>Company News - <%= model.company_name %> </h1>
+
+<form action="/news/<%= model.company_id %>" method="post">
+  <div class="form-horizontal">
+
+    <%- include("_news") -%>
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2"></label>
+      <div class="col-sm-10">
+        <a class="btn btn-outline-dark cancel" href="/uraniumstocks">Go Back to Stock Lists</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<%- include("_footer") -%>
