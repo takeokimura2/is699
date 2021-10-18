@@ -14,31 +14,26 @@
 
     <h2>Uranium Stock Analysis</h2>
 
-    <% console.log(chart) %>
-
-    <% function getChartData (chart) { %>
-    <%    console.log(chart) %>
-    <%    return chart} %>
-
-    <% async function displayChart (chart) { %>
-    <%    chartConfig = await getChartData(chart) %>
-
     <div class="m-5">
         <div class="card col-md-6 offset-md-3">
           <canvas id="myChart"></canvas>
         </div> 
     </div>
 
-    <% console.log('After getChartData function') %>
+    <% function getChartData (chart) { %>
+        <%    console.log('get chart') %>
+        <%    return chart} %>
 
-    <%    var myChart = new Chart(  %>
-    <%    document.getElementById('myChart'), chartConfig) %>
-    <% } %>
+        <% getChartData(chart).then(config => {%>
+            <% console.log(config) %>
+            <% const ctx = document.getElementById('myChart').getContext('2d') %>
+            <% const UraniumChart = new Chart(ctx, config) %>
+        <% })%>
 
-    <% displayChart(chart) %>
-
-
+    
     <%- include("_footer") -%>
 
 </body>
 </html>
+
+

@@ -248,9 +248,9 @@ app.get("/uraniumstockanalysis_test", (req, res) => {
       options: {}
     };
 
-    console.log(config)
-    console.log(config.data)
-    console.log(config.data.datasets)
+    //console.log(config)
+    //console.log(config.data)
+    //console.log(config.data.datasets)
 
     return config;
     
