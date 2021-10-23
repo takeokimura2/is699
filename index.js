@@ -4,6 +4,7 @@ const app = express();
 const dblib = require("./dblib.js");
 const multer = require("multer");
 const upload = multer();
+const axios = require("axios")
 
 // Add middleware to parse default urlencoded form
 app.use(express.urlencoded({ extended: false }));
@@ -167,7 +168,7 @@ app.post("/delete/:id", (req, res) => {
   });
 });
 
-// GET /news/5
+// GET /news/
 app.get("/news/:id", (req, res) => {
   const id = req.params.id;
   const sql = "SELECT * FROM URANIUM WHERE company_id = $1";
@@ -175,6 +176,48 @@ app.get("/news/:id", (req, res) => {
     // if (err) ...
     res.render("news", { model: result.rows[0] });
   });
+});
+
+
+// POST /news/
+app.post("/news/:id", async (req, res) => {
+  console.log(req.body)
+
+  searchValue = req.body.search_value;
+
+  console.log(searchValue)
+
+  var API_Key = "AIzaSyCalm5-PsQ0oD_RaH8quDuEEAXUoghG85s"
+
+  var videos =[]
+
+  const baseApiUrl = "https://www.googleapis.com/youtube/v3/search?key="
+  const url=`${baseApiUrl}${API_Key}&type=video&part=snippet&maxResults=10&q=${searchValue}`
+  console.log(url)
+
+  const response = await axios.get(url)
+  //console.log("response", response.data.items)
+  const searchResult = response.data.items
+  console.log(searchResult)
+
+  searchResult.forEach(item => {
+    video = `<iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder ="0" allowfullscreen></iframe>`
+    videos.push(video)
+
+  })
+
+
+  const id = req.params.id;
+  const sql = "SELECT * FROM URANIUM WHERE company_id = $1";
+  pool.query(sql, [id], (err, result) => {
+    // if (err) ...
+    res.render("news", {
+      model: result.rows[0], 
+      type: "post",
+      videos: videos 
+     })
+  });
+  
 });
 
 //Setup routes to uranium stock analysis

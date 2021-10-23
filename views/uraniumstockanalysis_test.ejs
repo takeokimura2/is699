@@ -20,20 +20,22 @@
         </div> 
     </div>
 
+
     <% function getChartData (chart) { %>
         <%    console.log('get chart') %>
         <%    return chart} %>
 
         <% getChartData(chart).then(config => {%>
-            <% console.log(config) %>
-            <% const ctx = document.getElementById('myChart').getContext('2d') %>
-            <% const UraniumChart = new Chart(ctx, config) %>
+            <% test = config %>
+            <% console.log(test) %>
+
         <% })%>
 
-    
     <%- include("_footer") -%>
 
 </body>
 </html>
 
-
+<script>
+    console.log('Hello World!')
+</script>
