@@ -203,8 +203,8 @@ app.post("/news/:id", async (req, res) => {
   console.log(searchResult)
 
   searchResult.forEach(item => {
-    video = item.id.videoId
-    videos.push(video)
+    //video = item.id.videoId
+    videos.push(item)
 
   })
 
