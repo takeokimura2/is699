@@ -174,7 +174,9 @@ app.get("/news/:id", (req, res) => {
   const sql = "SELECT * FROM URANIUM WHERE company_id = $1";
   pool.query(sql, [id], (err, result) => {
     // if (err) ...
-    res.render("news", { model: result.rows[0] });
+    res.render("news", {
+      type: "get",
+       model: result.rows[0] });
   });
 });
 
@@ -201,7 +203,7 @@ app.post("/news/:id", async (req, res) => {
   console.log(searchResult)
 
   searchResult.forEach(item => {
-    video = `<iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder ="0" allowfullscreen></iframe>`
+    video = item.id.videoId
     videos.push(video)
 
   })

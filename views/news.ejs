@@ -11,6 +11,24 @@
   </div>
 </form>
 
+<% if(type==="post") { %>
+  <% if (videos.length===0) { %>
+    <h3>No records found!</h3>
+    <% } else { %>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="videos">
+          <% videos.forEach(video=> { %>
+          <iframe width="420" height="315" src="http://www.youtube.com/embed/<%= video %>" frameborder ="0" allowfullscreen></iframe>
+          <br>
+          <% }) %>
+          </div>
+        </div>
+      </div>
+      
+    <%  console.log(videos[0]) %>
+  <% } %>
+<% } %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
