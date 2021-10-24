@@ -187,14 +187,19 @@ app.post("/news/:id", async (req, res) => {
 
   searchValue = req.body.search_value;
 
+  searchOrder = req.body.orderBy
+  searchResultCount = req.body.searchResults
+
   console.log(searchValue)
+  console.log(searchOrder)
+  console.log(searchResultCount)
 
   var API_Key = "AIzaSyCalm5-PsQ0oD_RaH8quDuEEAXUoghG85s"
 
   var videos =[]
 
   const baseApiUrl = "https://www.googleapis.com/youtube/v3/search?key="
-  const url=`${baseApiUrl}${API_Key}&type=video&part=snippet&maxResults=10&q=${searchValue}`
+  const url=`${baseApiUrl}${API_Key}&type=video&part=snippet&order=${searchOrder}&maxResults=${searchResultCount}&q=${searchValue}`
   console.log(url)
 
   const response = await axios.get(url)

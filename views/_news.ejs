@@ -24,18 +24,42 @@
   <br>
   <h2>Youtube Search</h2>
   <br>
+</div>
 
   <form id="form">
-    <div class="form-group">
-      <input type="text" class="form-control" name="search_value" id="search" value="<%= model.company_name %>">
+    <div class="form-group row">
+      <label for="search">Keyword: </label>
+      <input type="text" class="form-control" name="search_value" id="search" value="<%= model.company_name %>" />
     </div>
+    <p class="form-group row">
+      <label for="orderBy">Order By:  </label>
+      <select name="orderBy" id="orderBy">
+        <option value="date">Date</option>
+        <option value="rating">Rating</option>
+        <option value="relevance" selected>Relevance</option>
+        <option value="title">Title</option>
+        <option value="videoCount">Video Count</option>
+        <option value="viewCount">View Count</option>
+      </select>
+    </p>
+    <p class="form-group row">
+      <label for="searchResults">Search Results:  </label>
+      <select name="searchResults" id="searchResults">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="30" >30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+      </select>
+    </p>
     <br>
+
     <div class="form-group">
       <input type="submit" class="btn btn-danger" value="Search">
     </div>
 
   </form>
-</div>
+
 <br>
 
 <div class="row">
