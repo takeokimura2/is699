@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Takeo's IS699 Application</title>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
@@ -11,8 +13,42 @@
     <%- include("_header") -%>
 
     <h1>Natural Resource Investment Research Platform</h1>
+
+    <div class="gallery">
+        <img src="NewWorld.png" alt="" width="1100" height="400">
+    </div>
     
     <%- include("_footer") -%>
 
 </body>
+
+<script>
+
+$(document).ready(function() {
+
+var galleryImage = $(".gallery").find("img").first();
+var images = [
+  "ProtectEarth.jpg",
+  "GreenEnergy.jpg",
+  "Decarbonization.jpg",
+  "MiningIndustry.jpg",
+  "Investment.jpg",
+  "Silver.jpg",
+  "Copper.jpg",
+  "banner-insight-nuclear-energy.webp",
+  "NewWorld.png",
+];
+
+var i=0;
+setInterval(function(){
+  i = (i + 1) % images.length;
+  galleryImage.fadeOut(function(){
+    $(this).attr("src", images[i]);
+    $(this).fadeIn();
+  });
+  console.log(galleryImage.attr("src"))
+
+}, 3000);
+});
+</script>
 </html>

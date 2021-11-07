@@ -9,7 +9,7 @@
 <div class="form-group row">
   <label class="col-form-label col-sm-2" for="website">Website</label>
   <div class="col-sm-10">
-    <input readonly class="form-control" name="website" value="<%= model.website %>" />
+    <a  class="form-control" name="website" href="<%= model.website %>"><%= model.website %></a>
   </div>
 </div>
 
@@ -20,19 +20,17 @@
   </div>
 </div>
 
-<div class="container">
-  <br>
-  <h2>Youtube Search</h2>
-  <br>
+<div>
+  <img src="/YouTube.png" alt="" width="200" height="100" />
 </div>
 
   <form id="form">
     <div class="form-group row">
-      <label for="search">Keyword: </label>
-      <input type="text" class="form-control" name="search_value" id="search" value="<%= model.company_name %>" />
+      <label for="search" style="margin: 5px;">Keyword: </label>
+      <input type="text" class="form-control" name="search_value" id="search" value="<%= model.company_name %>" style="width: 400px"/>
     </div>
-    <p class="form-group row">
-      <label for="orderBy">Order By:  </label>
+    <div class="form-group row" margin="10px">
+      <label for="orderBy" style="margin: 5px;">Order By:</label>
       <select name="orderBy" id="orderBy">
         <option value="date">Date</option>
         <option value="rating">Rating</option>
@@ -41,9 +39,9 @@
         <option value="videoCount">Video Count</option>
         <option value="viewCount">View Count</option>
       </select>
-    </p>
-    <p class="form-group row">
-      <label for="searchResults">Search Results:  </label>
+    </div>
+    <div class="form-group row">
+      <label for="searchResults" style="margin: 5px;">Search Results:  </label>
       <select name="searchResults" id="searchResults">
         <option value="10" selected>10</option>
         <option value="20">20</option>
@@ -51,8 +49,8 @@
         <option value="40">40</option>
         <option value="50">50</option>
       </select>
-    </p>
-    <br>
+    </div>
+    
 
     <div class="form-group">
       <input type="submit" class="btn btn-danger" value="Search">
@@ -65,10 +63,11 @@
 <div class="row">
   <div class="col-md-12">
     <div id="videos">
-      
     </div>
   </div>
 </div>
+
+
 
 
 

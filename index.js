@@ -5,6 +5,9 @@ const dblib = require("./dblib.js");
 const multer = require("multer");
 const upload = multer();
 const axios = require("axios")
+const Highcharts = require('highcharts');
+var $ = require('jquery');
+
 
 // Add middleware to parse default urlencoded form
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +28,9 @@ app.use((req, res, next) => {
 // Application folders
 app.use(express.static("public"));
 
+// Application folders
+app.use('./views', express.static("public"));
+
 // Start listener
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server started (http://localhost:3000/) !");
@@ -43,6 +49,7 @@ const pool = new Pool({
 app.get("/", (req, res) => {
   //res.send("Root resource - Up and running!")
   res.render("index");
+
 });
 
 // Setup routes to uranium page
@@ -172,11 +179,19 @@ app.post("/delete/:id", (req, res) => {
 app.get("/news/:id", (req, res) => {
   const id = req.params.id;
   const sql = "SELECT * FROM URANIUM WHERE company_id = $1";
+
   pool.query(sql, [id], (err, result) => {
-    // if (err) ...
+    if(err) {
+      message = `Error - ${err.message}`;
+  } else {
+      message = "success";
+      company = result.rows[0];
+  };
     res.render("news", {
       type: "get",
-       model: result.rows[0] });
+      model: company,
+      
+     });
   });
 });
 
@@ -257,6 +272,9 @@ app.get("/uraniumstockanalysis", (req, res) => {
 
 //Setup routes to chart js
 app.get("/uraniumstockanalysis_test", (req, res) => {
+
+
+
   const sql = "SELECT * FROM URANIUM ORDER BY company_name";
 
   function getData(models) {
@@ -292,10 +310,13 @@ app.get("/uraniumstockanalysis_test", (req, res) => {
       ]
     };
 
+    
+
     const config = {
       type: 'bar',
       data: data,
-      options: {}
+      options: {},
+      
     };
 
     //console.log(config)
@@ -320,14 +341,18 @@ app.get("/uraniumstockanalysis_test", (req, res) => {
 
         charts = chartIt(models);
         
+        
 
     };
     res.render("uraniumstockanalysis_test", {
+        type: "get",
         message: message,
         model: models,
-        chart: charts
+        chart: charts,
+        
         
     });
 
   });
 });
+
