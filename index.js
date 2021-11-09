@@ -31,6 +31,9 @@ app.use(express.static("public"));
 // Application folders
 app.use('./views', express.static("public"));
 
+// Serve static content directly
+app.use(express.static("CSS"));
+
 // Start listener
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server started (http://localhost:3000/) !");

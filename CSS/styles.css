@@ -1,0 +1,30 @@
+p {
+  font-family: Calibri;
+  font-size: 20px;
+}
+
+.climatePolicy {
+  font-family: Calibri;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.mineralImage {
+  width: 2cm;
+}
+
+.mineralsHeader {
+  text-align: center;
+  width: 5cm;
+  font-size: 20px;
+}
+
+.minerals {
+  text-align: center;
+  width: 5cm;
+  font-size: 20px;
+  font-weight: bold;
+}
+.mineralUses {
+  font-size: 20px;
+}
