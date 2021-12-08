@@ -5,7 +5,7 @@ const dblib = require("./dblib.js");
 const multer = require("multer");
 const upload = multer();
 const axios = require("axios")
-const Highcharts = require('highcharts');
+const Highcharts = require("highcharts");
 var $ = require('jquery');
 
 
@@ -276,8 +276,6 @@ app.get("/uraniumstockanalysis", (req, res) => {
 //Setup routes to chart js
 app.get("/uraniumstockanalysis_test", (req, res) => {
 
-
-
   const sql = "SELECT * FROM URANIUM ORDER BY company_name";
 
   function getData(models) {
@@ -295,8 +293,8 @@ app.get("/uraniumstockanalysis_test", (req, res) => {
 
     chartData = await getData(models);
 
-    //console.log(chartData.companyName)
-    //console.log(chartData.resourceQuantity)
+    console.log(chartData.companyName)
+    console.log(chartData.resourceQuantity)
 
     const data = {
       labels: chartData.companyName,
@@ -359,3 +357,12 @@ app.get("/uraniumstockanalysis_test", (req, res) => {
   });
 });
 
+app.get("/highchart", (req, res) => {
+
+
+  res.render("highchart", {
+    type: "get",
+    
+})
+
+})

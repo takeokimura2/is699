@@ -1,12 +1,12 @@
 <%- include("_header") -%>
 
-<h1>List of Uranium Stocks</h1>
+<h3>List of Uranium Stocks</h3>
 
 <% if(message !== "success") { %>
   <h1>We Encountered an Error</h1>
   <p><%= message %></p>
 <% } else { %>
-  <h2>There are <%= model.length %> uranium stocks in the database</h2>
+  <h4>There are <%= model.length %> uranium stocks in the database</h4>
   <table class="table">
       <thead class="thead-dark">
           <tr>

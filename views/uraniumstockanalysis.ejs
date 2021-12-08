@@ -8,31 +8,24 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
 </head>
-<body class="bg-primary">
+<body>
 
     <%- include("_header") -%>
 
         <h2>Uranium Stock Analysis</h2>
     
         <div class="m-5">
-          <div class="card col-md-6 offset-md-3">
-            <canvas id="myChart"></canvas>
+          <div class="card col-md-8 offset-md-2">
+            <canvas id="mineralReserve"></canvas>
           </div> 
         </div>
+
     
         <script>
 
-        // <block:setup:1>
-        const labels = [
-            'Boss Energy Ltd',
-            'Nexgen Energy'];
-
-        const resourceAmount = [
-            71.6,
-            210];
 
         const data = {
-            labels: labels,
+            labels: ['Cameco Corp', 'Kazatomprom', 'Nexgen Energy', 'Denison Mines', 'Boss Energy Ltd'],
             datasets: [{
             label: 'Resource Quantity',
             backgroundColor: 'rgba(0, 99, 255, 0.2)',
@@ -42,8 +35,9 @@
             hoverBorderColor: ['red', 'yellow'],
             hoverBorderColor: 5,
 
-            data: resourceAmount,
-            }
+            data: resourceAmount = [455, 300, 210, 98, 71.6],
+            },
+            
         ]
         };
       // </block:setup>
@@ -53,6 +47,30 @@
             type: 'bar',
             data: data,
             options: {
+
+            plugins: {
+            title: {
+                display: true,
+                text: 'Mineral Reserves ',
+                font: {
+                    size:15,
+                }
+            },
+            subtitle: {
+                display: true,
+                text: '(Million lbs of U3O8)',
+                color: 'grey',
+                font: {
+                size: 12,
+                family: 'tahoma',
+                weight: 'normal',
+                style: 'italic'
+                },
+                padding: {
+                bottom: 10
+                }
+            }
+            }
 
             }
         };
@@ -64,16 +82,18 @@
         };
       
         </script>
+
       
         <script>
             // === include 'setup' then 'config' above ===
         
             var myChart = new Chart(
-            document.getElementById('myChart'),
+            document.getElementById('mineralReserve'),
             config
             );
 
         </script>
+
     
     <%- include("_footer") -%>
 

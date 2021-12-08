@@ -1,5 +1,0 @@
-Heroku URL: https://git.heroku.com/is699project.git
-URI: 
-postgres://lbmukrohtuczty:8003184f92cfb18717a19ccb1017a56621d563b16504867d9d22451174d62f0b@ec2-18-209-143-227.compute-1.amazonaws.com:5432/d1dacpitgi4bgj
-
-Heroku CLI: heroku pg:psql postgresql-amorphous-77725 --app is699project
